@@ -57,6 +57,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES := \
     com.android.future.usb.accessory \
     SamsungServiceMode \
+    macloader \
     Torch
 
 # Audio Packages
@@ -193,6 +194,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+
+# USB-OTG
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=true
 
 # Include exynos4 platform specific parts
 TARGET_HAL_PATH := hardware/samsung/exynos4/hal

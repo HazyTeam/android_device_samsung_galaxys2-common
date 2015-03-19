@@ -82,7 +82,7 @@ BOARD_HARDWARE_CLASS := hardware/samsung/cmhw
 BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH -DWORKAROUND_BUG_10194508
-BOARD_EGL_NEEDS_LEGACY_FB := true
+BOARD_EGL_NEEDS_FNW := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_SYSTEMUI_PBSIZE_HACK := true
 BOARD_EGL_SKIP_FIRST_DEQUEUE := true
@@ -214,6 +214,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_BATTERY_DEVICE_NAME := "battery"
 BOARD_CHARGER_RES := device/samsung/galaxys2-common/res/charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
 BOARD_USES_LEGACY_MMAP := true
 
