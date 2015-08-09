@@ -20,6 +20,7 @@
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USE_SAMSUNG_COLORFORMAT := true
 USE_SAMSUNG_COLORFORMAT := true
+BOARD_USES_LEGACY_MMAP := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
@@ -32,13 +33,11 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 EXYNOS4210_ENHANCEMENTS := true
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-EXYNOS4_ENHANCEMENTS := true
 
 ifdef EXYNOS4210_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DEXYNOS4210_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
-COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
 endif
 
 BOARD_VENDOR := samsung
@@ -52,8 +51,6 @@ TARGET_NO_SEPARATE_RECOVERY := true
 
 TARGET_PROVIDES_INIT := true
 TARGET_PROVIDES_INIT_TARGET_RC := true
-
-TARGET_NEEDS_NON_PIE_SUPPORT := true
 
 BOARD_NAND_PAGE_SIZE := 4096
 BOARD_NAND_SPARE_SIZE := 128
@@ -74,18 +71,18 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # Releasetools
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_img_from_target_files
+TARGET_RELEASETOOLS_EXTENSIONS := ./device/samsung/galaxys2-common/releasetools/extensions
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := hardware/samsung/cmhw
 
 # Graphics
 BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
+BOARD_EGL_NEEDS_FNW := true
+BOARD_EGL_SKIP_FIRST_DEQUEUE := true
+BOARD_EGL_SYSTEMUI_PBSIZE_HACK := true
 USE_OPENGL_RENDERER := true
 COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH -DWORKAROUND_BUG_10194508
-BOARD_EGL_NEEDS_FNW := true
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
-BOARD_EGL_SYSTEMUI_PBSIZE_HACK := true
-BOARD_EGL_SKIP_FIRST_DEQUEUE := true
 
 # FIMG Acceleration
 BOARD_USES_FIMGAPI := true
@@ -114,7 +111,7 @@ BOARD_USE_YAMAHA_MC1N2_AUDIO := true
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6260
-BOARD_RIL_CLASS := ../../../hardware/samsung/ril
+BOARD_RIL_CLASS := ../../../device/samsung/galaxys2-common/ril
 
 # Camera
 BOARD_USES_PROPRIETARY_LIBFIMC := true
@@ -140,7 +137,6 @@ WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/wifi/bcmdhd_sta.b
 WIFI_DRIVER_MODULE_AP_ARG        := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
-BOARD_NO_WIFI_HAL		 := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -160,39 +156,20 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     bluetooth.te \
-    radio.te \
-    file_contexts \
-    te_macros \
-    debuggerd.te \
     device.te \
-    dhcp.te \
     domain.te \
     drmserver.te \
+    dumpstate.te \
     file.te \
+    file_contexts \
     init.te \
     kernel.te \
-    kickstart.te \
-    lcd_device.te \
     mediaserver.te \
-    netmgrd.te \
-    platform_app.te \
-    qmiproxy.te \
-    qmuxd.te \
     rild.te \
-    secril.te \
-    servicemanager.te \
-    shell.te \
-    sysinit.te \
-    system.te \
     system_app.te \
     system_server.te \
-    time_daemon.te \
     ueventd.te \
-    vibe_device.te \
-    vold.te \
-    wpa.te \
-    wpa_supplicant.te \
-    zygote.te
+    vold.te
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/galaxys2-common/recovery/recovery_keys.c
@@ -212,11 +189,9 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/galaxys2-common/include
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGER_RES := device/samsung/galaxys2-common/res/charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/galaxys2-common/shbootimg.mk
-BOARD_USES_LEGACY_MMAP := true
 
 # Override healthd HAL
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.exynos4
